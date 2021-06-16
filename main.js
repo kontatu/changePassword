@@ -12,18 +12,29 @@ setBut.addEventListener('click', () => {
     newPW = newPassword.value;
     if (defPW === confirmPW) {
         if (confirmPW !== newPW) {
+            // abcの連続しない
+            const reserach = /abc/g;
+            let result = newPW.search(reserach);
+            console.log(result);
+            if (result < 0) {
+                alert(`PWを「${newPW}」に変更しました`);
+                defPW = newPW;
+            } else {
+                alert('「abc」を含むものは使えません');
+            }
+
             // 連続しない
-            const check = /(.)\1/;
-            let result = check.test(newPW);
+            // const check = /(.)\1/;
+            // let result = check.test(newPW);
             // xxx-yyyyの形
             // let result = newPW.match(/^\d{3}-?\d{4}$/g);
 
-            if (result) {
-                alert('文字を連続にしないで');
-            } else {
-                alert(`PWを「${newPW}」に変更しました`);
-                defPW = newPW;
-            }
+            // if (result) {
+            //     alert('文字を連続にしないで');
+            // } else {
+            //     alert(`PWを「${newPW}」に変更しました`);
+            //     defPW = newPW;
+            // }
 
             // 8文字制限
             // if (newPW.length > 8) {
