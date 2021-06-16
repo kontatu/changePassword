@@ -12,9 +12,14 @@ setBut.addEventListener('click', () => {
     newPW = newPassword.value;
     if (defPW === confirmPW) {
         if (confirmPW !== newPW) {
-            let result = newPW.match(/^\d{3}-?\d{4}$/g);
-            if (!result) {
-                alert('xxx-yyyyの形にしてください');
+            // 連続しない
+            const check = /(.)\1/;
+            let result = check.test(newPW);
+            // xxx-yyyyの形
+            // let result = newPW.match(/^\d{3}-?\d{4}$/g);
+
+            if (result) {
+                alert('文字を連続にしないで');
             } else {
                 alert(`PWを「${newPW}」に変更しました`);
                 defPW = newPW;
@@ -34,7 +39,7 @@ setBut.addEventListener('click', () => {
     } else {
         alert('PWが違います');
     }
-    nowPassword.textContent = `現在のPWは、${newPW}`;
+    nowPassword.textContent = `現在のPWは、${defPW}`;
 });
 
 // ^\d{3}-\d{4}  xxx-xxxx
